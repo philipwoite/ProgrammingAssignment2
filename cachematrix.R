@@ -11,12 +11,15 @@ makeCacheMatrix <- function(x = matrix()) {
 ## 14:45
 #environment(makeCacheMatrix) <- donder"
 	#myne <- x  
-#  if(!exists(myne))  {
-	setMyneNull <- function() {
+  if(!exists("myne", inherit = TRUE))  {
+  #if(("myne" %in% names(env))  {
+  #  myne <- myne} else {
+      
+#	setMyneNull <- function() {
 	  
     message("myne did not yet exist")
-    myne <- NULL}
- # }
+    myne <<- NULL}
+ #}
   
 	workingMatrix <- x  
 #  set <- function() myne <<- NULL
@@ -28,7 +31,7 @@ makeCacheMatrix <- function(x = matrix()) {
 
 	#list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
 
-	setinverse
+#	setinverse
 
 	list(#setMyneNull = setMyneNull, 
     goget = goget, setinverse = setinverse, getinverse = getinverse)
@@ -50,7 +53,7 @@ cacheSolve <- function(x,...) {
  # print(myne <- makeCacheMatrix(x)$goget())
 	if(!is.null(myne)) {
 		message("getting the cached inverse")
-		return(makeCacheMatrix(x)$getinverse())
+		myne <- makeCacheMatrix(x)$getinverse()
 	}
     else {
 	data <- x["goget()"]
@@ -58,8 +61,8 @@ cacheSolve <- function(x,...) {
 	myne <- (makeCacheMatrix(x)$setinverse())
 #	x["makeCacheMatrix$setinverse(myne)"]
 #      x["setinverse()"]	
-      myne
+  
     }
 #inverseMatrix <- solve(workingMatrix)
-
+return(myne)
 }
