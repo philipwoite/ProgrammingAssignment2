@@ -11,12 +11,12 @@ makeCacheMatrix <- function(x = matrix()) {
 ## 14:45
 #environment(makeCacheMatrix) <- donder"
 	#myne <- x  
-	
-	set <- function(y) {
-#	  x <<- y
-
-  myne <<- NULL
-}
+#  if(!exists(myne))  {
+	setMyneNull <- function() {
+	  
+    message("myne did not yet exist")
+    myne <- NULL}
+ # }
   
 	workingMatrix <- x  
 #  set <- function() myne <<- NULL
@@ -30,7 +30,7 @@ makeCacheMatrix <- function(x = matrix()) {
 
 	setinverse
 
-	list(#set = set, 
+	list(#setMyneNull = setMyneNull, 
     goget = goget, setinverse = setinverse, getinverse = getinverse)
 
 
@@ -44,10 +44,9 @@ theEnv <- environmentName(makeCacheMatrix)
 
 cacheSolve <- function(x,...) {
         ## Return a matrix that is the inverse of 'x'
-
   
  # assign(parent.env(makeCacheMatrix)
-   makeCacheMatrix(x)	
+  makeCacheMatrix(x)	
  # print(myne <- makeCacheMatrix(x)$goget())
 	if(!is.null(myne)) {
 		message("getting the cached inverse")
@@ -58,7 +57,7 @@ cacheSolve <- function(x,...) {
   message("I have to calculate the inverse")
 	myne <- (makeCacheMatrix(x)$setinverse())
 #	x["makeCacheMatrix$setinverse(myne)"]
-      x["setinverse()"]	
+#      x["setinverse()"]	
       myne
     }
 #inverseMatrix <- solve(workingMatrix)
